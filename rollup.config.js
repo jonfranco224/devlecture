@@ -12,7 +12,7 @@ const {
 export default {
   input: 'app/index.js',
   output: {
-    file: 'public/bundle.js',
+    file: 'docs/bundle.js',
     format: 'esm',
     sourcemap: true
   },
