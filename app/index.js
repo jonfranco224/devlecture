@@ -372,21 +372,37 @@ class View extends Component{
             {/* Code Editor */}
             <div class={`flex-1 flex flex-column ${APP.activePanel === 'editor' ? 'bord-blue' : 'bord-dark'}`} onClick={() => { setActivePanel('editor') }}>
               <div class='flex bg-mid h-35'>
-                <div class='flex flex-justify-start flex-center-y p-h-15 bord-dark-b'>
-                  <small><b>Code</b></small>
+                <div class='flex flex-justify-start flex-center-y p-h-15 bord-dark-b' style='padding-right: 25px;'>
+                  <small><b>HTML</b></small>
                 </div>
                 <div class='flex flex-center-x'>
                   <button class={`flex flex-center w-80 ${APP.activeCodePanel === 'head' ? 'bg-dark-code bord-dark-code-b no-hover' : 'bord-dark-b bg-dark'} bord-dark-r bord-dark-l`} onClick={() => { updateCodePanel('head') }}>
-                    <small style='letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;'>{'<head>'}</small>
+                    <small style='letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;'>
+                      <span style='color: rgba(255, 255, 255, .75);'><b>{`<`}</b></span>
+                      <span style='color: rgb(156, 220, 252);'>{`head`}</span>
+                      <span style='color: rgba(255, 255, 255, .75);'><b>{`>`}</b></span>
+                    </small>
                   </button>
                   <button class={`flex flex-center w-80 ${APP.activeCodePanel === 'css' ? 'bg-dark-code bord-dark-code-b no-hover' : 'bord-dark-b bg-dark'} bord-dark-r`} onClick={() => { updateCodePanel('css') }}>
-                    <small style='letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;'>{'<style>'}</small>
+                  <small style='letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;'>
+                      <span style='color: rgba(255, 255, 255, .75);'><b>{`<`}</b></span>
+                      <span style='color: rgb(156, 220, 252);'>{`style`}</span>
+                      <span style='color: rgba(255, 255, 255, .75);'><b>{`>`}</b></span>
+                    </small>
                   </button>
                   <button class={`flex flex-center w-80  ${APP.activeCodePanel === 'body' ? 'bg-dark-code bord-dark-code-b no-hover' : 'bord-dark-b bg-dark'} bord-dark-r`} onClick={() => { updateCodePanel('body') }}>
-                    <small style='letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;'>{'<body>'}</small>
+                    <small style='letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;'>
+                      <span style='color: rgba(255, 255, 255, .75);'><b>{`<`}</b></span>
+                      <span style='color: rgb(156, 220, 252);'>{`body`}</span>
+                      <span style='color: rgba(255, 255, 255, .75);'><b>{`>`}</b></span>
+                    </small>
                   </button>
                   <button class={`flex flex-center w-80 ${APP.activeCodePanel === 'js' ? 'bg-dark-code bord-dark-code-b no-hover' : 'bord-dark-b bg-dark'} bord-dark-r`} onClick={() => { updateCodePanel('js') }}>
-                    <small style='letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400; '>{'<script>'}</small>
+                    <small style='letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;'>
+                      <span style='color: rgba(255, 255, 255, .75);'><b>{`<`}</b></span>
+                      <span style='color: rgb(156, 220, 252);'>{`script`}</span>
+                      <span style='color: rgba(255, 255, 255, .75);'><b>{`>`}</b></span>
+                    </small>
                   </button>
                 </div>
                 <div class='flex-1 flex flex-justify-end bord-dark-b'>

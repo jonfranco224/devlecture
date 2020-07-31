@@ -446,21 +446,37 @@ var View = /*@__PURE__*/(function (Component) {
             /* Code Editor */,
             v( 'div', { class: ("flex-1 flex flex-column " + (APP.activePanel === 'editor' ? 'bord-blue' : 'bord-dark')), onClick: function () { setActivePanel('editor'); } },
               v( 'div', { class: 'flex bg-mid h-35' },
-                v( 'div', { class: 'flex flex-justify-start flex-center-y p-h-15 bord-dark-b' },
-                  v( 'small', null, v( 'b', null, "Code" ) )
+                v( 'div', { class: 'flex flex-justify-start flex-center-y p-h-15 bord-dark-b', style: 'padding-right: 25px;' },
+                  v( 'small', null, v( 'b', null, "HTML" ) )
                 ),
                 v( 'div', { class: 'flex flex-center-x' },
                   v( 'button', { class: ("flex flex-center w-80 " + (APP.activeCodePanel === 'head' ? 'bg-dark-code bord-dark-code-b no-hover' : 'bord-dark-b bg-dark') + " bord-dark-r bord-dark-l"), onClick: function () { updateCodePanel('head'); } },
-                    v( 'small', { style: 'letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;' }, '<head>')
+                    v( 'small', { style: 'letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;' },
+                      v( 'span', { style: 'color: rgba(255, 255, 255, .75);' }, v( 'b', null, "<" )),
+                      v( 'span', { style: 'color: rgb(156, 220, 252);' }, "head"),
+                      v( 'span', { style: 'color: rgba(255, 255, 255, .75);' }, v( 'b', null, ">" ))
+                    )
                   ),
                   v( 'button', { class: ("flex flex-center w-80 " + (APP.activeCodePanel === 'css' ? 'bg-dark-code bord-dark-code-b no-hover' : 'bord-dark-b bg-dark') + " bord-dark-r"), onClick: function () { updateCodePanel('css'); } },
-                    v( 'small', { style: 'letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;' }, '<style>')
+                  v( 'small', { style: 'letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;' },
+                      v( 'span', { style: 'color: rgba(255, 255, 255, .75);' }, v( 'b', null, "<" )),
+                      v( 'span', { style: 'color: rgb(156, 220, 252);' }, "style"),
+                      v( 'span', { style: 'color: rgba(255, 255, 255, .75);' }, v( 'b', null, ">" ))
+                    )
                   ),
                   v( 'button', { class: ("flex flex-center w-80  " + (APP.activeCodePanel === 'body' ? 'bg-dark-code bord-dark-code-b no-hover' : 'bord-dark-b bg-dark') + " bord-dark-r"), onClick: function () { updateCodePanel('body'); } },
-                    v( 'small', { style: 'letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;' }, '<body>')
+                    v( 'small', { style: 'letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;' },
+                      v( 'span', { style: 'color: rgba(255, 255, 255, .75);' }, v( 'b', null, "<" )),
+                      v( 'span', { style: 'color: rgb(156, 220, 252);' }, "body"),
+                      v( 'span', { style: 'color: rgba(255, 255, 255, .75);' }, v( 'b', null, ">" ))
+                    )
                   ),
                   v( 'button', { class: ("flex flex-center w-80 " + (APP.activeCodePanel === 'js' ? 'bg-dark-code bord-dark-code-b no-hover' : 'bord-dark-b bg-dark') + " bord-dark-r"), onClick: function () { updateCodePanel('js'); } },
-                    v( 'small', { style: 'letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400; ' }, '<script>')
+                    v( 'small', { style: 'letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;' },
+                      v( 'span', { style: 'color: rgba(255, 255, 255, .75);' }, v( 'b', null, "<" )),
+                      v( 'span', { style: 'color: rgb(156, 220, 252);' }, "script"),
+                      v( 'span', { style: 'color: rgba(255, 255, 255, .75);' }, v( 'b', null, ">" ))
+                    )
                   )
                 ),
                 v( 'div', { class: 'flex-1 flex flex-justify-end bord-dark-b' },
