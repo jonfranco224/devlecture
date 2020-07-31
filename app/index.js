@@ -309,13 +309,13 @@ class View extends Component{
               <div class='flex p-h-15'>
                 <div class='flex flex-center bord-dark-r'>
                   <svg width='20' height='20' aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chalkboard-teacher" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-chalkboard-teacher fa-w-20 fa-3x"><path fill="rgb(52, 152, 219)" d="M208 352c-2.39 0-4.78.35-7.06 1.09C187.98 357.3 174.35 360 160 360c-14.35 0-27.98-2.7-40.95-6.91-2.28-.74-4.66-1.09-7.05-1.09C49.94 352-.33 402.48 0 464.62.14 490.88 21.73 512 48 512h224c26.27 0 47.86-21.12 48-47.38.33-62.14-49.94-112.62-112-112.62zm-48-32c53.02 0 96-42.98 96-96s-42.98-96-96-96-96 42.98-96 96 42.98 96 96 96zM592 0H208c-26.47 0-48 22.25-48 49.59V96c23.42 0 45.1 6.78 64 17.8V64h352v288h-64v-64H384v64h-76.24c19.1 16.69 33.12 38.73 39.69 64H592c26.47 0 48-22.25 48-49.59V49.59C640 22.25 618.47 0 592 0z" class=""></path></svg>
-                  <div class='p-h-15'>
-                    <small><b>Vidcode</b></small>
+                  <div style='padding-left: 8px; padding-right: 10px;'>
+                    <small><b>Dev Lecture</b></small>
                   </div>
                 </div>
                 <div class='flex bord-dark-r'>
                   <button class='flex flex-center p-h-15' onClick={() => { openProjectModal() }} title='Select From My Projects'>
-                    <svg width='13' height='13' aria-hidden="true" focusable="false" data-prefix="fas" data-icon="laptop-code" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-laptop-code fa-w-20 fa-3x"><path fill="rgb(255, 255, 255)" d="M255.03 261.65c6.25 6.25 16.38 6.25 22.63 0l11.31-11.31c6.25-6.25 6.25-16.38 0-22.63L253.25 192l35.71-35.72c6.25-6.25 6.25-16.38 0-22.63l-11.31-11.31c-6.25-6.25-16.38-6.25-22.63 0l-58.34 58.34c-6.25 6.25-6.25 16.38 0 22.63l58.35 58.34zm96.01-11.3l11.31 11.31c6.25 6.25 16.38 6.25 22.63 0l58.34-58.34c6.25-6.25 6.25-16.38 0-22.63l-58.34-58.34c-6.25-6.25-16.38-6.25-22.63 0l-11.31 11.31c-6.25 6.25-6.25 16.38 0 22.63L386.75 192l-35.71 35.72c-6.25 6.25-6.25 16.38 0 22.63zM624 416H381.54c-.74 19.81-14.71 32-32.74 32H288c-18.69 0-33.02-17.47-32.77-32H16c-8.8 0-16 7.2-16 16v16c0 35.2 28.8 64 64 64h512c35.2 0 64-28.8 64-64v-16c0-8.8-7.2-16-16-16zM576 48c0-26.4-21.6-48-48-48H112C85.6 0 64 21.6 64 48v336h512V48zm-64 272H128V64h384v256z" class=""></path></svg>
+                    <svg width='15' height='15' aria-hidden="true" focusable="false" data-prefix="fas" data-icon="laptop-code" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-laptop-code fa-w-20 fa-3x"><path fill="rgb(255, 255, 255)" d="M255.03 261.65c6.25 6.25 16.38 6.25 22.63 0l11.31-11.31c6.25-6.25 6.25-16.38 0-22.63L253.25 192l35.71-35.72c6.25-6.25 6.25-16.38 0-22.63l-11.31-11.31c-6.25-6.25-16.38-6.25-22.63 0l-58.34 58.34c-6.25 6.25-6.25 16.38 0 22.63l58.35 58.34zm96.01-11.3l11.31 11.31c6.25 6.25 16.38 6.25 22.63 0l58.34-58.34c6.25-6.25 6.25-16.38 0-22.63l-58.34-58.34c-6.25-6.25-16.38-6.25-22.63 0l-11.31 11.31c-6.25 6.25-6.25 16.38 0 22.63L386.75 192l-35.71 35.72c-6.25 6.25-6.25 16.38 0 22.63zM624 416H381.54c-.74 19.81-14.71 32-32.74 32H288c-18.69 0-33.02-17.47-32.77-32H16c-8.8 0-16 7.2-16 16v16c0 35.2 28.8 64 64 64h512c35.2 0 64-28.8 64-64v-16c0-8.8-7.2-16-16-16zM576 48c0-26.4-21.6-48-48-48H112C85.6 0 64 21.6 64 48v336h512V48zm-64 272H128V64h384v256z" class=""></path></svg>
                     <small style='padding-left: 10px;'><b>My Projects</b></small>
                   </button>
                 </div>
@@ -360,7 +360,7 @@ class View extends Component{
               <div class={`bord-dark-t bg-dark w-full flex iframe-container rel ${VIEW.videoOpen ? 'flex' : 'disp-none'}`} style={`${VIEW.videoOpen ? 'min-height:350px;' : ''}`} id='video'
                 dangerouslySetInnerHTML={{__html:
                   APP.projects[APP.activeProject].videoEmbed ? APP.projects[APP.activeProject].videoEmbed : 
-                    `<div class='flex flex-center w-full h-full abs top left' style='color: rgba(255, 255, 255, .8); color: white; opacity: .25;'><h2>Embed a video to get started!</h2></div>`
+                    `<div class='flex flex-center w-full h-full abs top left' style='color: rgba(255, 255, 255, .8); color: white; opacity: .25;'><h3 style='font-weight: 500;'>Embed a video to get started!</h3></div>`
                 }}>
               </div>  
             </div>
@@ -384,7 +384,7 @@ class View extends Component{
                     <small style='letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;'>{'<body>'}</small>
                   </button>
                   <button class={`flex flex-center w-80 ${APP.activeCodePanel === 'js' ? 'bg-dark-code bord-dark-code-b no-hover' : 'bord-dark-b bg-dark'} bord-dark-r`} onClick={() => { updateCodePanel('js') }}>
-                    <small style='letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;'>{'<script>'}</small>
+                    <small style='letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400; '>{'<script>'}</small>
                   </button>
                 </div>
                 <div class='flex-1 flex flex-justify-end bord-dark-b'>
