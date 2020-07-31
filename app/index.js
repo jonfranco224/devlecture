@@ -23,10 +23,13 @@ const openVideoSettings = () => {
 }
 
 const updateEmbedCode = (val) => {
-  if (val.indexOf('iframe') === -1) return
-  if (val.indexOf('script') !== -1) return
+  let newVal = val
+  
+  if (val.indexOf('<iframe') === -1 || val.indexOf('script') !== -1 || val === 'iframe') {
+    newVal = ''
+  }
 
-  APP.projects[APP.activeProject].videoEmbed = val
+  APP.projects[APP.activeProject].videoEmbed = newVal
 }
 
 const updateTarget = (target) => {
@@ -43,13 +46,7 @@ const updateCodePanel = (target) => {
 }
 
 const updateProjectName = (val) => {
-  const newkey = val
-  const key = APP.activeProject
-
-  APP.projects[newkey] = APP.projects[key];
-  APP.activeProject = newkey
-  delete APP.projects[key];
-
+  APP.projects[APP.activeProject].title = val
   VIEW.render()
 }
 
@@ -271,7 +268,11 @@ const downloadFile = (e) => {
 class View extends Component{
   componentDidMount () {
     VIEW.render = () => {
-      this.setState({}, () => {})
+      this.setState({}, () => {
+        for (const key in VIEW.editors) {
+          if (VIEW.editors[key]) VIEW.editors[key].layout()
+        }
+      })
     }
 
     configureMonacoIDE()
@@ -323,7 +324,7 @@ class View extends Component{
             </div>
             <div class='flex-1 flex flex-center'>
               <div class='p-h-15 txt-center'>
-                <small style='font-size: 14px;'><b>{APP.activeProject}</b></small>
+                <small style='font-size: 14px;'><b>{APP.projects[APP.activeProject].title}</b></small>
               </div>
             </div>
             <div class='flex-1 flex flex-justify-end'>
@@ -342,12 +343,12 @@ class View extends Component{
         <div class='flex' style='height: calc(100% - 50px);'>
           <div class='flex-1 flex flex-column'>
             {/* Video */}
-            <div class='bord-dark rel'>
+            <div class={`${VIEW.videoOpen ? 'flex-1' : ''} bord-dark rel flex-column`} style='max-height: 400px;'>
               <div class='flex' style='background: rgb(50, 50, 50); height: 35px;'>
-                <button class="flex flex-center-y p-h-15 flex-1 no-ptr" onClick={() => { toggleVideoVisible() }}>
-                  {/* <div style='padding-right: 10px;'>
+                <button class="flex flex-center-y p-h-15 flex-1" onClick={() => { toggleVideoVisible() }}>
+                  <div style='padding-right: 10px;'>
                     <img src={`img/caret-${VIEW.videoOpen ? 'down' : 'right'}.svg`} />
-                  </div> */}
+                  </div>
                   <div class='flex flex-center'>
                     <small><b>Video</b></small>
                   </div>
@@ -357,12 +358,13 @@ class View extends Component{
 
                 </button>
               </div>
-              <div class={`bord-dark-t bg-dark w-full flex iframe-container rel ${VIEW.videoOpen ? 'flex' : 'disp-none'}`} style={`${VIEW.videoOpen ? 'min-height:350px;' : ''}`} id='video'
+              <div class={`flex-1 bord-dark-t bg-dark w-full flex iframe-container rel bg-dark ${VIEW.videoOpen ? 'flex' : 'disp-none'}`} style={`${VIEW.videoOpen ? '' : ''}`} id='video'
                 dangerouslySetInnerHTML={{__html:
-                  APP.projects[APP.activeProject].videoEmbed ? APP.projects[APP.activeProject].videoEmbed : 
-                    `<div class='flex flex-center w-full h-full abs top left' style='color: rgba(255, 255, 255, .8); color: white; opacity: .25;'><h3 style='font-weight: 500;'>Embed a video to get started!</h3></div>`
+                  APP.projects[APP.activeProject].videoEmbed 
+                    ? APP.projects[APP.activeProject].videoEmbed
+                    : `<div class='flex flex-center w-full h-full abs top left' style='color: rgba(255, 255, 255, .8); color: white; opacity: .25;'><h3 style='font-weight: 500;'>Embed a video to get started!</h3></div>`
                 }}>
-              </div>  
+              </div> 
             </div>
             
             <div style="height: 5px"></div>
@@ -461,10 +463,10 @@ class View extends Component{
               <div class="p-10 bg-light bord-dark-l bord-dark-r bord-dark-b" style="border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;">
                 <div class="m-5" style='margin-top: 10px;'>
                     {
-                      Object.keys(APP.projects).map((name, i) => {
+                      APP.projects.map((proj, i) => {
                         return <div class='b-r-2 overflow-hidden' style='margin-bottom: 10px;'>
-                          <button class='w-full txt-left bg-dark p-h-15 p-v-10'  onClick={() => { openProject(name) }}>
-                            <small><b>{name}</b></small>
+                          <button class='w-full txt-left bg-dark p-h-15 p-v-10'  onClick={() => { openProject(i) }}>
+                            <small><b>{proj.title}</b></small>
                           </button>
                         </div>
                       })
@@ -483,7 +485,7 @@ class View extends Component{
                 <div class="m-5 p-v-5">
                     <div class="flex flex-column">
                       <small class="bold" style="width: 100px; padding-bottom: 5px;">Project Title</small>
-                      <input type='text' value={APP.activeProject} onInput={(e) => { updateProjectName(e.target.value) }}></input>
+                      <input type='text' value={APP.projects[APP.activeProject].title} onInput={(e) => { updateProjectName(e.target.value) }}></input>
                     </div>
                 </div>
                 <div class="flex" style="padding-top: 5px;">

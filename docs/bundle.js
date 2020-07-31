@@ -8,41 +8,45 @@ var initAppDefault = function () {
   APP.activePanel = 'editor';
   APP.activeCodePanel = 'body';
 
-  APP.activeProject = 'Starter Project';
-  APP.projects = {
-    'Starter Project': {
+  APP.activeProject = 0;
+  APP.projects = [
+    {
+      title: 'Starter Project',
       head: '',
       body: '',
       css: '',
       js: '',
       videoEmbed: ''
-    }, 'Empty Project 2': {
+    }, {
+      title: 'Empty Project 2',
       head: '',
       body: '',
       css: '',
       js: '',
       videoEmbed: ''
-    }, 'Empty Project 3': {
+    }, {
+      title: 'Empty Project 3',
       head: '',
       body: '',
       css: '',
       js: '',
       videoEmbed: ''
-    }, 'Empty Project 4': {
+    }, {
+      title: 'Empty Project 4',
       head: '',
       body: '',
       css: '',
       js: '',
       videoEmbed: ''
-    }, 'Empty Project 5': {
+    }, {
+      title: 'Empty Project 5',
       head: '',
       body: '',
       css: '',
       js: '',
       videoEmbed: ''
     }
-  };
-    
+  ];
 
   Object.seal(APP);
 };
@@ -103,10 +107,13 @@ var openVideoSettings = function () {
 };
 
 var updateEmbedCode = function (val) {
-  if (val.indexOf('iframe') === -1) { return }
-  if (val.indexOf('script') !== -1) { return }
+  var newVal = val;
+  
+  if (val.indexOf('<iframe') === -1 || val.indexOf('script') !== -1 || val === 'iframe') {
+    newVal = '';
+  }
 
-  APP.projects[APP.activeProject].videoEmbed = val;
+  APP.projects[APP.activeProject].videoEmbed = newVal;
 };
 
 var updateTarget = function (target) {
@@ -123,13 +130,7 @@ var updateCodePanel = function (target) {
 };
 
 var updateProjectName = function (val) {
-  var newkey = val;
-  var key = APP.activeProject;
-
-  APP.projects[newkey] = APP.projects[key];
-  APP.activeProject = newkey;
-  delete APP.projects[key];
-
+  APP.projects[APP.activeProject].title = val;
   VIEW.render();
 };
 
@@ -342,7 +343,11 @@ var View = /*@__PURE__*/(function (Component) {
     var this$1 = this;
 
     VIEW.render = function () {
-      this$1.setState({}, function () {});
+      this$1.setState({}, function () {
+        for (var key in VIEW.editors) {
+          if (VIEW.editors[key]) { VIEW.editors[key].layout(); }
+        }
+      });
     };
 
     configureMonacoIDE();
@@ -394,7 +399,7 @@ var View = /*@__PURE__*/(function (Component) {
             ),
             v( 'div', { class: 'flex-1 flex flex-center' },
               v( 'div', { class: 'p-h-15 txt-center' },
-                v( 'small', { style: 'font-size: 14px;' }, v( 'b', null, APP.activeProject ))
+                v( 'small', { style: 'font-size: 14px;' }, v( 'b', null, APP.projects[APP.activeProject].title ))
               )
             ),
             v( 'div', { class: 'flex-1 flex flex-justify-end' },
@@ -413,12 +418,12 @@ var View = /*@__PURE__*/(function (Component) {
         v( 'div', { class: 'flex', style: 'height: calc(100% - 50px);' },
           v( 'div', { class: 'flex-1 flex flex-column' }
             /* Video */,
-            v( 'div', { class: 'bord-dark rel' },
+            v( 'div', { class: ((VIEW.videoOpen ? 'flex-1' : '') + " bord-dark rel flex-column"), style: 'max-height: 400px;' },
               v( 'div', { class: 'flex', style: 'background: rgb(50, 50, 50); height: 35px;' },
-                v( 'button', { class: "flex flex-center-y p-h-15 flex-1 no-ptr", onClick: function () { toggleVideoVisible(); } }
-                  /* <div style='padding-right: 10px;'>
-                    <img src={`img/caret-${VIEW.videoOpen ? 'down' : 'right'}.svg`} />
-                  </div> */,
+                v( 'button', { class: "flex flex-center-y p-h-15 flex-1", onClick: function () { toggleVideoVisible(); } },
+                  v( 'div', { style: 'padding-right: 10px;' },
+                    v( 'img', { src: ("img/caret-" + (VIEW.videoOpen ? 'down' : 'right') + ".svg") })
+                  ),
                   v( 'div', { class: 'flex flex-center' },
                     v( 'small', null, v( 'b', null, "Video" ) )
                   )
@@ -428,11 +433,12 @@ var View = /*@__PURE__*/(function (Component) {
 
                 )
               ),
-              v( 'div', { class: ("bord-dark-t bg-dark w-full flex iframe-container rel " + (VIEW.videoOpen ? 'flex' : 'disp-none')), style: ("" + (VIEW.videoOpen ? 'min-height:350px;' : '')), id: 'video', dangerouslySetInnerHTML: {__html:
-                  APP.projects[APP.activeProject].videoEmbed ? APP.projects[APP.activeProject].videoEmbed : 
-                    "<div class='flex flex-center w-full h-full abs top left' style='color: rgba(255, 255, 255, .8); color: white; opacity: .25;'><h3 style='font-weight: 500;'>Embed a video to get started!</h3></div>"
+              v( 'div', { class: ("flex-1 bord-dark-t bg-dark w-full flex iframe-container rel bg-dark " + (VIEW.videoOpen ? 'flex' : 'disp-none')), style: ("" + (VIEW.videoOpen ? '' : '')), id: 'video', dangerouslySetInnerHTML: {__html:
+                  APP.projects[APP.activeProject].videoEmbed 
+                    ? APP.projects[APP.activeProject].videoEmbed
+                    : "<div class='flex flex-center w-full h-full abs top left' style='color: rgba(255, 255, 255, .8); color: white; opacity: .25;'><h3 style='font-weight: 500;'>Embed a video to get started!</h3></div>"
                 } }
-              )  
+              ) 
             ),
             
             v( 'div', { style: "height: 5px" })
@@ -528,10 +534,10 @@ var View = /*@__PURE__*/(function (Component) {
               v( 'div', { class: "flex flex-center bg-mid bord-dark p-v-5", style: "border-top-right-radius: 5px; border-top-left-radius: 5px;" }, v( 'small', null, v( 'b', null, "Projects" ) )),
               v( 'div', { class: "p-10 bg-light bord-dark-l bord-dark-r bord-dark-b", style: "border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;" },
                 v( 'div', { class: "m-5", style: 'margin-top: 10px;' },
-                    Object.keys(APP.projects).map(function (name, i) {
+                    APP.projects.map(function (proj, i) {
                         return v( 'div', { class: 'b-r-2 overflow-hidden', style: 'margin-bottom: 10px;' },
-                          v( 'button', { class: 'w-full txt-left bg-dark p-h-15 p-v-10', onClick: function () { openProject(name); } },
-                            v( 'small', null, v( 'b', null, name ) )
+                          v( 'button', { class: 'w-full txt-left bg-dark p-h-15 p-v-10', onClick: function () { openProject(i); } },
+                            v( 'small', null, v( 'b', null, proj.title ) )
                           )
                         )
                       })
@@ -549,7 +555,7 @@ var View = /*@__PURE__*/(function (Component) {
                 v( 'div', { class: "m-5 p-v-5" },
                     v( 'div', { class: "flex flex-column" },
                       v( 'small', { class: "bold", style: "width: 100px; padding-bottom: 5px;" }, "Project Title"),
-                      v( 'input', { type: 'text', value: APP.activeProject, onInput: function (e) { updateProjectName(e.target.value); } })
+                      v( 'input', { type: 'text', value: APP.projects[APP.activeProject].title, onInput: function (e) { updateProjectName(e.target.value); } })
                     )
                 ),
                 v( 'div', { class: "flex", style: "padding-top: 5px;" },

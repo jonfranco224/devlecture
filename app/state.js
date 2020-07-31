@@ -6,41 +6,45 @@ const initAppDefault = () => {
   APP.activePanel = 'editor'
   APP.activeCodePanel = 'body'
 
-  APP.activeProject = 'Starter Project'
-  APP.projects = {
-    'Starter Project': {
+  APP.activeProject = 0
+  APP.projects = [
+    {
+      title: 'Starter Project',
       head: '',
       body: '',
       css: '',
       js: '',
       videoEmbed: ''
-    }, 'Empty Project 2': {
+    }, {
+      title: 'Empty Project 2',
       head: '',
       body: '',
       css: '',
       js: '',
       videoEmbed: ''
-    }, 'Empty Project 3': {
+    }, {
+      title: 'Empty Project 3',
       head: '',
       body: '',
       css: '',
       js: '',
       videoEmbed: ''
-    }, 'Empty Project 4': {
+    }, {
+      title: 'Empty Project 4',
       head: '',
       body: '',
       css: '',
       js: '',
       videoEmbed: ''
-    }, 'Empty Project 5': {
+    }, {
+      title: 'Empty Project 5',
       head: '',
       body: '',
       css: '',
       js: '',
       videoEmbed: ''
     }
-  }
-    
+  ]
 
   Object.seal(APP)
 }
