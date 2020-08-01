@@ -4,6 +4,16 @@ var ENV = window.location.href.includes('localhost:4000') ? 'DEV' : 'PROD';
 var APP = {};
 var VIEW = { render: undefined };
 
+var exampleHead = "<title>My Site</title>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">\n<meta name=\"description\" content=\"\">\n<meta name=\"keywords\" content=\"\">\n<meta property=\"og:type\" content=\"website\">\n<meta property=\"og:url\" content=\"\">\n<meta property=\"og:title\" content=\"\">\n<meta property=\"og:description\" content=\"\">";
+
+var exampleCSS = "*, *::after, *::before{\n  box-sizing: border-box;\n  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif\n}\n\nhtml, body {\n  background-color: lightblue;\n  min-height: 100%;\n}\n\nh2, p {\n  color: rgba(0, 0, 0, .8);\n  text-align: center;\n}\n\n#clock-container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 50px 0px;\n}\n\n.clock {\n  width: 300px;\n  height: 300px;\n  background-color: rgba(255, 255, 255, .8);\n  border-radius: 50%;\n  border: 2px solid black;\n  position: relative;\n}\n\n.clock .number {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  text-align: center;\n  transform: rotate(var(--rotation));\n  font-size: 1.5rem;\n}\n\n.clock .number1 { --rotation: 30deg; }\n.clock .number2 { --rotation: 60deg; }\n.clock .number3 { --rotation: 90deg; }\n.clock .number4 { --rotation: 120deg; }\n.clock .number5 { --rotation: 150deg; }\n.clock .number6 { --rotation: 180deg; }\n.clock .number7 { --rotation: 210deg; }\n.clock .number8 { --rotation: 240deg; }\n.clock .number9 { --rotation: 270deg; }\n.clock .number10 { --rotation: 300deg; }\n.clock .number11 { --rotation: 330deg; }\n\n.clock .hand {\n  --rotation: 0;\n  position: absolute;\n  bottom: 50%;\n  left: 50%;\n  width: 10px;\n  height: 50%;\n  background-color: black;\n  border: 1px solid white;\n  border-top-left-radius: 10px;\n  border-top-right-radius: 10px;\n  z-index: 10;\n  transform-origin: bottom;\n  transform: translateX(-50%) rotate(calc(var(--rotation) * 1deg));\n}\n\n.clock::after {\n  content: '';\n  position: absolute;\n  background-color: black;\n  z-index: 11;\n  width: 15px;\n  height: 15px;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n\n.clock .second {\n  width: 3px;\n  height: 45%;\n  background-color: red;\n}\n\n.clock .minute {\n  width: 7px;\n  height: 40%;\n  background-color: black;\n}\n\n.clock .hour {\n  width: 10px;\n  height: 35%;\n  background-color: black;\n}";
+
+var exampleBody = "<div style='padding: 10px 0px;'>\n  <h2>Welcome!</h2>\n  <p>To start an empty project, go to \"My Projects\".</p>\n</div>\n<div id='clock-container'>\n  <div class='clock'>\n    <div class='hand hour' data-hour-hand></div>\n    <div class='hand minute' data-minute-hand></div>\n    <div class='hand second' data-second-hand></div>\n    <div class='number number1'>1</div>\n    <div class='number number2'>2</div>\n    <div class='number number3'>3</div>\n    <div class='number number4'>4</div>\n    <div class='number number5'>5</div>\n    <div class='number number6'>6</div>\n    <div class='number number7'>7</div>\n    <div class='number number8'>8</div>\n    <div class='number number9'>9</div>\n    <div class='number number10'>10</div>\n    <div class='number number11'>11</div>\n    <div class='number number12'>12</div>\n  </div>\n</div>\n";
+
+var exampleJS = "setInterval(setClock, 1000)\n\nconst hourHand = document.querySelector('[data-hour-hand]')\nconst minuteHand = document.querySelector('[data-minute-hand]')\nconst secondHand = document.querySelector('[data-second-hand]')\n\nfunction setClock() {\n    const currentDate = new Date()\n    const secondsRatio = currentDate.getSeconds() / 60\n    const minutesRatio = (secondsRatio + currentDate.getMinutes()) / 60\n    const hoursRatio = (minutesRatio + currentDate.getHours()) / 12\n\n    setRotation(secondHand, secondsRatio)\n    setRotation(minuteHand, minutesRatio)\n    setRotation(hourHand, hoursRatio)\n}\n\nfunction setRotation(element, rotationRatio) {\n    element.style.setProperty('--rotation', rotationRatio * 360)\n}\n\nsetClock()";
+
+var exampleEmbed = "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/Ki0XXrlKlHY\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>";
+
 var initAppDefault = function () {
   APP.activePanel = 'editor';
   APP.activeCodePanel = 'body';
@@ -11,12 +21,12 @@ var initAppDefault = function () {
   APP.activeProject = 0;
   APP.projects = [
     {
-      title: 'Starter Project',
-      head: '',
-      body: '',
-      css: '',
-      js: '',
-      videoEmbed: ''
+      title: 'Example Project',
+      head: exampleHead,
+      body: exampleBody,
+      css: exampleCSS,
+      js: exampleJS,
+      videoEmbed: exampleEmbed
     }, {
       title: 'Empty Project 2',
       head: '',
@@ -367,14 +377,12 @@ var View = /*@__PURE__*/(function (Component) {
       }
     });
 
-
-
-    // Adding google analytics
-    // window.dataLayer = window.dataLayer || [];
-    // function gtag(){dataLayer.push(arguments);}
-    // gtag('js', new Date());
-
-    // gtag('config', 'UA-144729452-1');
+    // This is the Global Site Tag (gtag.js) tracking code for this property. Copy and paste this code as the first item into the <HEAD> of every webpage you want to track. If you already have a Global Site Tag on your page, simply add the config line from the snippet below to your existing Global Site Tag.
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-174152293-1');
   };
 
   View.prototype.render = function render () {
@@ -445,9 +453,14 @@ var View = /*@__PURE__*/(function (Component) {
             
             /* Code Editor */,
             v( 'div', { class: ("flex-1 flex flex-column " + (APP.activePanel === 'editor' ? 'bord-blue' : 'bord-dark')), onClick: function () { setActivePanel('editor'); } },
-              v( 'div', { class: 'flex bg-mid h-35' },
-                v( 'div', { class: 'flex flex-justify-start flex-center-y p-h-15 bord-dark-b', style: 'padding-right: 25px;' },
-                  v( 'small', null, v( 'b', null, "HTML" ) )
+              v( 'div', { class: 'flex bg-mid h-35' }
+                /* <div class='flex flex-justify-start flex-center-y p-h-15 bord-dark-b' style='padding-right: 25px;'>
+                  <small><b>{'<html/>'}</b></small>
+                </div> */,
+                v( 'div', { class: 'flex flex-center', style: 'padding-left: 20px; padding-right: 25px;' },
+                  v( 'small', { style: 'letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;' },
+                    v( 'span', { style: 'color: rgb(255, 255, 255);' }, "index.html")
+                  )
                 ),
                 v( 'div', { class: 'flex flex-center-x' },
                   v( 'button', { class: ("flex flex-center w-80 " + (APP.activeCodePanel === 'head' ? 'bg-dark-code bord-dark-code-b no-hover' : 'bord-dark-b bg-dark') + " bord-dark-r bord-dark-l"), onClick: function () { updateCodePanel('head'); } },

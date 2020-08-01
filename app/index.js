@@ -292,14 +292,12 @@ class View extends Component{
       }
     })
 
-
-
-    // Adding google analytics
-    // window.dataLayer = window.dataLayer || [];
-    // function gtag(){dataLayer.push(arguments);}
-    // gtag('js', new Date());
-
-    // gtag('config', 'UA-144729452-1');
+    // This is the Global Site Tag (gtag.js) tracking code for this property. Copy and paste this code as the first item into the <HEAD> of every webpage you want to track. If you already have a Global Site Tag on your page, simply add the config line from the snippet below to your existing Global Site Tag.
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-174152293-1');
   }
 
   render () {
@@ -372,8 +370,13 @@ class View extends Component{
             {/* Code Editor */}
             <div class={`flex-1 flex flex-column ${APP.activePanel === 'editor' ? 'bord-blue' : 'bord-dark'}`} onClick={() => { setActivePanel('editor') }}>
               <div class='flex bg-mid h-35'>
-                <div class='flex flex-justify-start flex-center-y p-h-15 bord-dark-b' style='padding-right: 25px;'>
-                  <small><b>HTML</b></small>
+                {/* <div class='flex flex-justify-start flex-center-y p-h-15 bord-dark-b' style='padding-right: 25px;'>
+                  <small><b>{'<html/>'}</b></small>
+                </div> */}
+                <div class='flex flex-center' style='padding-left: 20px; padding-right: 25px;'>
+                  <small style='letter-spacing: 1px; font-family: Monaco; font-size: 11px; font-weight: 400;'>
+                    <span style='color: rgb(255, 255, 255);'>{`index.html`}</span>
+                  </small>
                 </div>
                 <div class='flex flex-center-x'>
                   <button class={`flex flex-center w-80 ${APP.activeCodePanel === 'head' ? 'bg-dark-code bord-dark-code-b no-hover' : 'bord-dark-b bg-dark'} bord-dark-r bord-dark-l`} onClick={() => { updateCodePanel('head') }}>
