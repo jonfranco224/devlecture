@@ -28,8 +28,8 @@ export default {
       transforms: { asyncAwait: false }
     }),
     resolve(),
-    PROD && terser(),
-    PROD && filesize({
+    terser(),
+    filesize({
       showMinifiedSize: false,
       showGzippedSize: false
     })
