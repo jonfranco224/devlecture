@@ -31,7 +31,7 @@ h2, p {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px 0px;
+  padding: 50px 0px 25px 0px;
 }
 
 .clock {
@@ -111,7 +111,7 @@ h2, p {
   background-color: black;
 }`
 
-const exampleBody = `<div style='padding: 10px 0px;'>
+const exampleBody = `<div style='padding: 20px 0px 0px 0px;'>
   <h2>Welcome!</h2>
   <p>To start an empty project, go to "My Projects".</p>
 </div>
@@ -134,7 +134,10 @@ const exampleBody = `<div style='padding: 10px 0px;'>
     <div class='number number12'>12</div>
   </div>
 </div>
-`
+<div style='padding: 0px 0px;'>
+  <h2>"Build A Clock With Javascript"</h2>
+  <p>A project by WebDevSimplified</p>
+</div>`
 
 const exampleJS = `setInterval(setClock, 1000)
 
@@ -173,7 +176,7 @@ const initAppDefault = () => {
       body: exampleBody,
       css: exampleCSS,
       js: exampleJS,
-      videoEmbed: exampleEmbed
+      videoEmbed: ''
     }, {
       title: 'Empty Project 2',
       head: '',
