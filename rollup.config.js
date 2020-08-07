@@ -3,6 +3,7 @@ import filesize from 'rollup-plugin-filesize'
 import buble from 'rollup-plugin-buble'
 import svgi from 'rollup-plugin-svgi'
 import { terser } from 'rollup-plugin-terser'
+import livereload from 'rollup-plugin-livereload'
 
 const {
   DEV = false,
@@ -17,6 +18,7 @@ export default {
     sourcemap: true
   },
   plugins: [
+    livereload('docs'),
     svgi({
       options: {
         jsx: 'preact'
