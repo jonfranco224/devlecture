@@ -21,7 +21,7 @@ export default {
     clearScreen: false
   },
   plugins: [
-    // DEV && livereload('docs'),
+    DEV && livereload('docs'),
     svgi({
       options: {
         jsx: 'preact'
