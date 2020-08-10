@@ -96,7 +96,7 @@ ${APP.projects[APP.activeProject].css.trim()}
   </head>
   <body>
     ${APP.projects[APP.activeProject].body.trim()}
-    <script type="text/babel">
+    <script>
 ${APP.projects[APP.activeProject].js}
     </script>
   </body>
@@ -597,4 +597,6 @@ if (ENV === 'PROD') {
     event.returnValue = `Are you sure you want to leave?`;
   });
 }
+
+
 
