@@ -5,17 +5,15 @@ import svgi from 'rollup-plugin-svgi'
 import { terser } from 'rollup-plugin-terser'
 import livereload from 'rollup-plugin-livereload'
 
-const {
-  DEV = false,
-  PROD = false
-} = process.env
-
 export default {
   input: 'app/index.js',
   output: {
     file: 'docs/bundle.js',
     format: 'esm',
     sourcemap: true
+  },
+  watch: {
+    clearScreen: false
   },
   plugins: [
     livereload('docs'),
@@ -25,9 +23,7 @@ export default {
       }
     }),
     buble({
-      jsx: 'h',
-      objectAssign: 'Object.assign',
-      transforms: { asyncAwait: false }
+      jsx: 'h'
     }),
     resolve(),
     terser(),
