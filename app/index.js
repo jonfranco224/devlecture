@@ -337,9 +337,12 @@ class View extends Component{
                   <small style='padding-left: 10px;'><b>Export</b></small>
                 </button>
               </a>
-              <a class='flex flex-center clickable hover bord-dark-l' target="_blank" href='https://devlecture.us17.list-manage.com/subscribe?u=c1941282fe209100009b673c8&id=e63d3e93d8'>
-                <button class='flex flex-center p-h-15 no-ptr'>
-                  <small class='blue' style='padding-left: 10px;'><b>Sign Up</b></small>
+              <a class='flex flex-center clickable hover bord-dark-l p-h-10' target="_blank" href='https://www.patreon.com/devlecture'>
+                <button class='flex flex-center no-ptr txt-center b-r-2 p-h-15' style='background: rgb(52, 152, 219); font-size: 13px; height: 30px;'>
+                  <svg width='11' height='11' aria-hidden="true" focusable="false" data-prefix="fab" data-icon="patreon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-patreon fa-w-16 fa-3x"><path fill="rgb(255, 255, 255)" d="M512 194.8c0 101.3-82.4 183.8-183.8 183.8-101.7 0-184.4-82.4-184.4-183.8 0-101.6 82.7-184.3 184.4-184.3C429.6 10.5 512 93.2 512 194.8zM0 501.5h90v-491H0v491z" class=""></path></svg>
+                  <span style='margin-left: 7px;'>
+                    <b>Patreon</b>
+                  </span>
                 </button>
               </a>
             </div>
